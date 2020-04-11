@@ -1,0 +1,107 @@
+program tb_vm(output bit valid_s,
+			  output bit [2:0] items_s,
+			  output bit [3:0] count_s,
+			  output bit [7:0] cost_s,
+			  output bit enter_key,
+			  output bit clk,rst,
+			  output bit [1:0]coins,
+			  output bit [5:0]button,
+			  input bit [2:0]product,
+              input logic [1:0]status,
+              input bit [7:0]balance,
+              input bit [7:0]info  
+			  );
+			  
+/*//SUPPLIER INPUTS TO DESIGN
+bit valid_s;
+bit [2:0] item_s;
+bit [3:0] count_s;
+bit [7:0] cost_s;
+bit enter_key;
+
+//USER INPUTS TO DESIGN
+bit [1:0]coins;
+bit [5:0]button;
+
+//ESSENTIAL INPUTS
+bit clk, rst;*/
+
+//======================= Clock Generator =================================================
+
+initial begin: clockGenerator
+	clk = 0;							//Initializing the clk to 0.
+	forever #5 clk = ~clk;				//Toggling the clk after every 5 unit time.
+end: clockGenerator
+
+//======================== SUPPLIER Task to perform Restocking ============================
+task supplier;
+		int i;
+		valid_s = 1'b1;
+		rst = 1'b0;
+		for(i=0;i<6;i++)
+			begin
+				items_s = i;
+				cost_s = i;
+				count_s = 15;
+			$display("ITEM = %d\t COST = %b\t COUNT =%d",items_s,cost_s,count_s);
+				#1;
+			end
+		valid_s = 1'b0;
+endtask: supplier
+
+
+task buttoncoinzero;
+		button = 6'b000000;
+		coins = 2'b00;
+endtask:buttoncoinzero
+
+
+task consumer(
+			input logic [5:0]i,
+			input logic [1:0]j,
+			input logic k);
+		begin
+		//@(posedge clk);
+			button = i;
+			coins = j;
+			enter_key = k;
+			
+			#1 repeat(2) @(posedge clk)buttoncoinzero;
+			#1;
+		
+				
+		end
+endtask
+
+//Task for when user putting coins continously.  
+task coins_continue(
+					input logic [5:0]i,
+					input logic [1:0]j,
+					input logic k
+					);
+		begin
+			button = i;
+			coins = j;
+			enter_key = k;
+			#1;
+		end
+endtask:coins_continue
+
+initial
+	begin
+		$monitor("STATUS=%d\t BUTTON=%d\t COINS=%b\t PRODUCT=%d\t BALANCE = %b\t INFORMATION = %b\t",status,button,coins,product,balance,info);
+		
+			@(posedge clk)supplier;
+//========================= Test Case 1: CONSUMER : BUTTON 1 is SELECTED : COIN 5 cent is inserted ===========================	
+			#1 @(posedge clk) consumer(6'b000001,2'b01,1'b1);
+			
+//========================= Test Case 2: CONSUMER : BUTTON 2 is SELECTED : COIN 5 cent is inserted for 10 cent product value ================
+			#2 repeat(2) @(posedge clk) consumer(6'b000010,2'b01,1'b1);
+			
+//========================= Test Case 3: CONSUMER : BUTTON 2 is SELECTED : COIN 10 cent is inserted continously for 10 cent product value ================			
+			#2 repeat(3) @(posedge clk) coins_continue(6'b000010,2'b10,1'b1);
+			
+//========================= Test Case 4: CONSUMER : BUTTON 3 is SELECTED : COIN 			
+			#100 $stop;
+	end
+endprogram		
