@@ -7,9 +7,9 @@ module TOP();
 				logic clk,rst;
 				bit [1:0]coins;
 				bit  [5:0]button;
-				bit [2:0]product;
+				logic [2:0]product;
 				logic [1:0]status;
-				bit [7:0]balance;
+				bit [15:0]balance;
 				bit [7:0]info;
 				
 				tb_vm DUT(.*);			//Instantiation Of Testbench of Vending Machine.

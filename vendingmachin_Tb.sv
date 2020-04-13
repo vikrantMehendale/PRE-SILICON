@@ -6,9 +6,9 @@ program tb_vm(output bit valid_s,
 			  output bit clk,rst,
 			  output bit [1:0]coins,
 			  output bit [5:0]button,
-			  input bit [2:0]product,
+			  input logic [2:0]product,
               input logic [1:0]status,
-              input bit [7:0]balance,
+              input bit [15:0]balance,
               input bit [7:0]info  
 			  );
 			  
@@ -41,27 +41,69 @@ task supplier;
 		for(i=0;i<6;i++)
 			begin
 				items_s = i;
-				cost_s = i;
+				cost_s = i*5+5;
 				count_s = 15;
-			$display("ITEM = %d\t COST = %d\t COUNT =%d",items_s,cost_s,count_s);
-				#1;
+			$display("ITEM = %d\t COST = %b\t COUNT =%d",items_s,cost_s,count_s);
+				#10;
 			end
 		valid_s = 1'b0;
 endtask: supplier
 
 
+task buttoncoinzero;
+		button = 6'b000000;
+		coins = 2'b00;
+endtask:buttoncoinzero
+
+
+task consumer(
+			input logic [5:0]i,
+			input logic [1:0]j,
+			input logic k);
+		begin
+		//@(posedge clk);
+			button = i;
+			coins = j;
+			enter_key = k;
+			
+			repeat(2) @(posedge clk)buttoncoinzero;
+			#10;
+		
+				
+		end
+endtask
+
+//Task for when user putting coins continously.  
+task coins_continue(
+					input logic [5:0]i,
+					input logic [1:0]j,
+					input logic k
+					);
+		begin
+			button = i;
+			coins = j;
+			enter_key = k;
+			#10;
+		end
+endtask:coins_continue
+
 initial
 	begin
-//=========================Test Case 1: CONSUMER : BUTTON 1 is SELECTED : COIN 5 cent is inserted ===========================	
-				@(posedge clk)supplier;
-			#5	@(posedge clk)button = 6'b000001 ; coins = 2'b01; enter_key = 1'b1;
-			$monitor("ITEM = %d\t COST = %d\t COUNT =%d\t status=%d\t Button=%d\t Coins=%b\t Product=%d\t",items_s,cost_s,count_s,status,button,coins,product);	
-			#5	@(posedge clk)button = 6'b000000 ; coins = 2'b00; enter_key = 1'b0;
-			$monitor("ITEM = %d\t COST = %d\t COUNT =%d\t status=%d\t Button=%d\t Coins=%b\t Product=%d\t",items_s,cost_s,count_s,status,button,coins,product);	
-			#5	@(posedge clk)button = 6'b000000 ; coins = 2'b00; enter_key = 1'b0;
-			$monitor("ITEM = %d\t COST = %d\t COUNT =%d\t status=%d\t Button=%d\t Coins=%b\t Product=%d\t",items_s,cost_s,count_s,status,button,coins,product);		
-	
-	
-			#50	$stop; 
+		$monitor("STATUS=%d\t BUTTON=%b\t COINS=%b\t PRODUCT=%d\t BALANCE =%d\t INFORMATION = %d\t",status,button,coins,product,balance,info);
+		
+			@(posedge clk)supplier;
+//========================= Test Case 1: CONSUMER : BUTTON 1 is SELECTED : COIN 5 cent is inserted ===========================	
+			#10 repeat(3) @(posedge clk) consumer(6'b000100,2'b01,1'b1);
+			
+//========================= Test Case 2: CONSUMER : BUTTON 2 is SELECTED : COIN 5 cent is inserted for 10 cent product value ================
+			#10 repeat(2) @(posedge clk) consumer(6'b000010,2'b01,1'b1);
+			
+//========================= Test Case 3: CONSUMER : BUTTON 2 is SELECTED : COIN 10 cent is inserted continously for 10 cent product value ================			
+			#10 repeat(3) @(posedge clk) coins_continue(6'b010000,2'b11,1'b1);
+			
+//========================= Test Case 4: CONSUMER : BUTTON 1 and 3 is SELECTED : COIN 5 cent is inserted =========================== 	
+			#20  @(posedge clk) consumer(6'b000101,2'b01,1'b1);
+				
+			#200 $stop;
 	end
 endprogram		
