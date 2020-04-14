@@ -1,3 +1,17 @@
+////////////////////////////////////////////////////////////////////////////
+// 
+// 	Vending Machine TOP: vm_top.sv - Vending Machine TOP.
+//	
+//	Author : Saurabh Chavan, Vikrant Mehendale.
+//	Date : 04/13/2020.
+//  
+//	Description:
+// 	------------------------------------
+//  This has instanstiation of Vending Machine and testbench.
+//  
+//////////////////////////////////////////////////////////////////////////
+
+
 module TOP();
 				bit valid_s;
 				bit [2:0] items_s;

@@ -1,3 +1,16 @@
+////////////////////////////////////////////////////////////////////////////
+// 
+// 	Vending Machine Testbench: vm_tb.sv - Vending Machine Testbench.
+//	
+//	Author : Saurabh Chavan, Vikrant Mehendale.
+//	Date : 04/13/2020.
+//  
+//	Description:
+// 	------------------------------------
+//  This test the Vending Machine Module.
+//  It has several basic test cases.
+//////////////////////////////////////////////////////////////////////////
+
 program tb_vm(output bit valid_s,
 			  output bit [2:0] items_s,
 			  output bit [3:0] count_s,
@@ -104,6 +117,9 @@ initial
 			
 //========================= Test Case 4: CONSUMER : BUTTON 1 and 3 is SELECTED : COIN 5 cent is inserted =========================== 	
 			#20  @(posedge clk) consumer(6'b000101,2'b01,1'b1);
+//
+			repeat(2) @(posedge clk) consumer(6'b000100,2'b01,1'b1);
+					  @(posedge clk) rst = 1'b1;
 				
 			#200 $stop;
 	end

@@ -1,3 +1,33 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 
+// 	Vending Machine : vending_machine.sv - Vending Machine Module.
+//	
+//	Author : Saurabh Chavan, Vikrant Mehendale.
+//	Date : 04/13/2020.
+//
+//	Description:
+//	------------------------------------------------------------------------	
+//	This is Vending Machine Design Module.
+//	It has Three States: IDLE, BUTTON, PRODUCT.
+//	It has inputs from Supplier, Consumer. 
+//  Supplier select item and can change cost and count of items.
+//  Consumer select item and put coin of value 5 cents(01), 10 cents(10), 25 cents(11), and press enter_key.
+//  Consumer cannot select two or more buttons. If he select two or more buttons it will gic=ve error in Info Panel.
+//  There are Outputs known as Balance, Info Panel, Status.
+//  Balance shows how much balance is remain by consumer, Info Panel shows the Actual cost of Product, Status shows that it has provided the Product or not or internal Error.
+//  There are two resets, soft reset and hard reset. Soft reset can be give by consumer if he gives wrong input of button, Hard Reset can make all the outputs and inputs from supplier as zero.
+//  When 'valid_s' is Asserted control of Vending Machine is given to Supplier and otherwise control is given to Consumer.
+//  For get Product from Vending Machine Consumer needs to Press Valid Button, Insert right amount of value and press enter key.
+//  If consumer put less amount as compare to actual value, consumer again needs to put coin and again press button and enter key.
+//  Consumer can give coins continously as input and also can press button continously.
+//
+//  Assumptions & Restrictions:
+//	------------------------------------------------------------------------
+//  Consumer use right amount of coins.
+//  Consumer will not get money back.
+//  Supplier can only give cost of product as 12.75$.
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -79,21 +109,22 @@ always_comb
 								end	
 						//Hard Reset.		
 						
-							if(rst == 1'b1)			
+							if(rst == 1'b1)										// Hard Reset is High.		
 										begin
 										for(i=0;i<6;i++)
 											begin
-												count_u[i] = 8'b00000000;
-												actual_value[i] = 4'b0000;
-												info = 'z;
+												count_u[i] = 6'b000000;			//Count_u array is 0.
+												actual_value[i] = 4'b0000;		//actual_value array is 0.
+												info = 'z;						//information is tri state.
+												balance = 'z;					//balance is tri state.
 											end
 										end		
 						//SUPPLIER Control 				
 							else if(valid_s && flag)		//Checking status of valid_s and flag for deciding whether to give control to supplier or not.					
 								begin
 									next <= IDLE;	
-						// Checking which item is selected by SUPPLIER, and giving counts and cost to respective item.
 									
+						// Checking which item is selected by SUPPLIER, and giving counts and cost to respective item.
 									
 									 if(items_s == 3'b000 && cost_s <= 8'b11111111)				// item 1 is selected by SUPPLIER.
 										begin
@@ -129,7 +160,7 @@ always_comb
 							
 						//USER Control
 						// Here we are checking status of valid_button and valid_s and reset registers and enter_key for deciding whether to give control to USER or Not.
-								else if((valid_button == 1) && (valid_s == 0) && (rst ==0 )  )						//LOGIC for IDLE to BUTTON transition
+								else if((valid_button == 1) && (valid_s == 0) && (rst ==0 )  ) //LOGIC for IDLE to BUTTON transition
 										begin
 											for(i=0; i < 6; i++)
 												begin
@@ -156,26 +187,26 @@ always_comb
 			//In BUTTON State we are checking which button is pressed. Also we are checking the count of product in Vending Machine.
 			
 				BUTTON :begin
-							product = 'z;						//Initialising value of product.
-							if(coins == 2'b01)					//checking value of inserted coin is 5 cents.
+							product = 'z;																//Initialising value of product.
+							if(coins == 2'b01)															//checking value of inserted coin is 5 cents.
 								begin
-									bal = bal + 3'b101;			//Adding 4 cents
+									bal = bal + 3'b101;													//Adding 4 cents
 									balance = bal;			
 								end
-							else if(coins == 2'b10)				//checking the value of inserted coin is 10 cents.
+							else if(coins == 2'b10)														//checking the value of inserted coin is 10 cents.
 								begin
-									bal = bal + 4'b1010;		//Adding 10 cents	
+									bal = bal + 4'b1010;												//Adding 10 cents	
 									balance = bal;
 								end
-							else if(coins == 2'b11)				//checking the value of inserted coin is 25 cents.
+							else if(coins == 2'b11)														//checking the value of inserted coin is 25 cents.
 								begin
-									bal = bal + 5'b11001;		//Adding 25 cents
+									bal = bal + 5'b11001;												//Adding 25 cents
 									balance = bal;
 								end
 							else
 								begin
-								bal = bal;
-								balance = bal;
+								bal = bal;																
+								balance = bal;															//Keeping Balance as it is.
 								end
 							flag = 1'b0;																//Initialising flag 0, even SUPPLIER wants to take control he have to wait for completion of transaction.
 							
@@ -204,9 +235,9 @@ always_comb
 												end
 										end
 										
-									else if(soft_rst == 1'b1)
+									else if(soft_rst == 1'b1)											//if Soft Reset is asserted. 
 												begin
-													next <= IDLE;
+													next <= IDLE;						
 													status = 2'b01;
 													info = 'z;
 												end
@@ -217,35 +248,35 @@ always_comb
 			//In PRODUCT State product is calculated of respective button.			
 				PRODUCT	:begin
 							product = 'z;
-							if(coins == 2'b01)					//checking value of inserted coin is 5 cents.
+							if(coins == 2'b01)															//checking value of inserted coin is 5 cents.
 								begin
-									bal = bal + 3'b101;			//adding 5 cents in binary.
+									bal = bal + 3'b101;													//adding 5 cents in binary.
 								end
-							else if(coins == 2'b10)				//checking the value of inserted coin is 10 cents.
+							else if(coins == 2'b10)														//checking the value of inserted coin is 10 cents.
 								begin
-									bal = bal + 4'b1010;		//Adding 10 cents in binary. 	
+									bal = bal + 4'b1010;												//Adding 10 cents in binary. 	
 								end
-							else if(coins == 2'b11)				//checking the value of inserted coin is 25 cents.
+							else if(coins == 2'b11)														//checking the value of inserted coin is 25 cents.
 								begin
-									bal = bal + 5'b11001;		//adding 25 cents in binary.
+									bal = bal + 5'b11001;												//adding 25 cents in binary.
 								end
 							else
 								bal = bal;
-							flag = 1'b0;										//Initialising flag 0, even SUPPLIER wants to take control he have to wait for completion of transaction.
+								flag = 1'b0;															//Initialising flag 0, even SUPPLIER wants to take control he have to wait for completion of transaction.
 							for(i=0;i<6;i++)
 								begin
 								//LOGIC for BUTTON to PRODUCT transition
-									if(prod==i)									/*the prod variable is used to get the index number indicating the button pressed 
-																				  thus for the same button the corresponding product must come out*/
+									if(prod==i)															/*the prod variable is used to get the index number indicating the button pressed 
+																											thus for the same button the corresponding product must come out*/
 										begin
-											count_u[i] = count_u[i] - 1;
-											product = i+1;						// i+1 because when 1st button is pressed it will indicate PRODUCT of 1st button is come out of Vending Machine.
-											next <= IDLE;
-											flag = 1'b1;
-											balance = bal - actual_value[i];	//Calculating remaing balance of USER.
-											bal = bal - actual_value[i];
-											info = 8'b00000000;				//Info indicating Value of Product.
-											status = 2'b11;						//STATUS : PRODUCT Given 
+											count_u[i] = count_u[i] - 1;								//Reducing count.
+											product = i+1;												// i+1 because when 1st button is pressed it will indicate PRODUCT of 1st button is come out of Vending Machine.
+											next <= IDLE;							
+											flag = 1'b1;												//flag is asserted.
+											balance = bal - actual_value[i];							//Calculating remaing balance of USER.
+											bal = bal - actual_value[i];								//updating bal varible after subtracting the cost of product.
+											info = 8'b00000000;											//Info indicating Value of Product.
+											status = 2'b11;												//STATUS : PRODUCT Given 
 										end
 									
 								end
