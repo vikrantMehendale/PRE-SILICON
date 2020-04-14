@@ -8,8 +8,9 @@ program tb_vm(output bit valid_s,
 			  output bit [5:0]button,
 			  input logic [2:0]product,
               input logic [1:0]status,
-              input bit [15:0]balance,
-              input bit [7:0]info  
+              input logic [15:0]balance,
+              input logic [7:0]info, 
+			  output bit soft_rst
 			  );
 			  
 /*//SUPPLIER INPUTS TO DESIGN

@@ -1,3 +1,6 @@
+
+
+
 module vm(input bit [1:0]coins, [5:0]button, 					//coins button : Inputs given by USER.
 		  input bit [2:0]items_s, 								//items_s : Item Selected by SUPPLIER.
 		  input bit [3:0]count_s,								//count_s : Count of item given by SUPPLIER.
@@ -42,7 +45,8 @@ always_comb
 			// We are checking whether only one button is pressed by USER or Not.
 				IDLE :	begin
 							flag = 1'b1;						//Initialising value of flag to 1, so even in IDLE state valid become 1, SUPPLIER can get control of Vending Machine.
-							valid_button = 0;							//Initialising valid_button to 0, so if no button is pressed or multiple buttons are pressed then it will not change state.		
+							valid_button = 0;					//Initialising valid_button to 0, so if no button is pressed or multiple buttons are pressed then it will not change state.		
+							product = 'z;						//Initialising product as z.
 							if(coins == 2'b01)					//checking value of inserted coin is 5 cents.
 								begin
 									bal = bal + 3'b101;									//adding 5 cents in binary.
@@ -73,16 +77,18 @@ always_comb
 											valid_button = valid_button + 1; //changing the value of valid_button when only one button is pressed.
 										end
 								end	
-								
-						//SUPPLIER Control 
-							if(rst == 1'b1)
+						//Hard Reset.		
+						
+							if(rst == 1'b1)			
 										begin
-											cost_s = 8'b00000000;
-											count_s = 4'b0000;
-											valid_s = 1'b0;
-											items_s = 3'b000;
-											info = 'z;
-										end	
+										for(i=0;i<6;i++)
+											begin
+												count_u[i] = 8'b00000000;
+												actual_value[i] = 4'b0000;
+												info = 'z;
+											end
+										end		
+						//SUPPLIER Control 				
 							else if(valid_s && flag)		//Checking status of valid_s and flag for deciding whether to give control to supplier or not.					
 								begin
 									next <= IDLE;	
@@ -119,10 +125,6 @@ always_comb
 											count_u[5] = count_s;
 											actual_value[5] = cost_s;
 										end
-									else
-										begin
-											cost_s = 'z;
-										end
 								end	
 							
 						//USER Control
@@ -131,20 +133,20 @@ always_comb
 										begin
 											for(i=0; i < 6; i++)
 												begin
-												if(button[i] == 1'b1)
+												if(button[i] == 1'b1)						//Checking which button is pressed.
 													begin
-														next <= BUTTON; 
-														flag = 1'b0;
+														next <= BUTTON; 					//Next State.
+														flag = 1'b0;						//Deasserting flag.
 														status = 2'b10;						//STATUS : Processing
 														info = actual_value[i];				//Displaying info as actual value of product.
-														button_u = button;
+														button_u = button;					//Storing button value.
 													end
 												end
 										end
 								else if((valid_button != 1) || (valid_button != 0))			//If Multiple Buttons are Pressed.
 									begin
-										next <= IDLE;
-										info = 8'b00000000;								//display error that multiple buttons have been pressed and now will move to IDLE state
+										next <= IDLE;										//Next State.	
+										info = 8'b00000000;									//display error that multiple buttons have been pressed and now will move to IDLE state
 									end
 								else
 								next <= IDLE;
@@ -154,11 +156,11 @@ always_comb
 			//In BUTTON State we are checking which button is pressed. Also we are checking the count of product in Vending Machine.
 			
 				BUTTON :begin
-							product = 'z;
+							product = 'z;						//Initialising value of product.
 							if(coins == 2'b01)					//checking value of inserted coin is 5 cents.
 								begin
 									bal = bal + 3'b101;			//Adding 4 cents
-									balance = bal;
+									balance = bal;			
 								end
 							else if(coins == 2'b10)				//checking the value of inserted coin is 10 cents.
 								begin
@@ -175,30 +177,30 @@ always_comb
 								bal = bal;
 								balance = bal;
 								end
-							flag = 1'b0;												//Initialising flag 0, even SUPPLIER wants to take control he have to wait for completion of transaction.
+							flag = 1'b0;																//Initialising flag 0, even SUPPLIER wants to take control he have to wait for completion of transaction.
 							
 							for(i=0; i < 6; i++)
 								begin
-									if(button_u[i] == 1)
+									if(button_u[i] == 1)												//Checking which button is pressed.
 										begin
-											if(count_u[i] == 0)							//If no Product is available in Vending Machine next state will be IDLE State.
+											if(count_u[i] == 0)											//If no Product is available in Vending Machine next state will be IDLE State.
 												begin
 													next <= IDLE;
-													status = 2'b00;						//STATUS : Internal Error
-													info = actual_value[i];				//Displaying info as actual value of product.
+													status = 2'b00;										//STATUS : Internal Error
+													info = actual_value[i];								//Displaying info as actual value of product.
 												end
-										else if((bal >= actual_value[i]) &&  (enter_key == 1))				// If product is available in Vending Machine and ammount which was given by USER 
-												begin									// is equal to or greater than actual_value then next state will be PRODUCT State. 
+										else if((bal >= actual_value[i]) && (enter_key == 1))			// If product is available in Vending Machine and ammount which was given by USER 
+												begin													// is equal to or greater than actual_value then next state will be PRODUCT State. 
 													next <= PRODUCT;
 													prod=i;
-													status = 2'b10;						//STATUS : Processing
-													info = actual_value[i];				//Displaying info as actual value of product.
+													status = 2'b10;										//STATUS : Processing
+													info = actual_value[i];								//Displaying info as actual value of product.
 												end
-										else if(bal < actual_value[i])					// If product is available in Vending Machine but amount which was given by USER 
-												begin									// is less that actual_value of product then next state will be IDLE.
+										else if(bal < actual_value[i])									// If product is available in Vending Machine but amount which was given by USER 
+												begin													// is less that actual_value of product then next state will be IDLE.
 													next <= IDLE;
-													status = 2'b01;						//STATUS : No PRODUCT
-													info = actual_value[i];				//Displaying info as actual value of product.
+													status = 2'b01;										//STATUS : No PRODUCT
+													info = actual_value[i];								//Displaying info as actual value of product.
 												end
 										end
 										

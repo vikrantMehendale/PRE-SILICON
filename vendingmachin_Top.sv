@@ -9,8 +9,9 @@ module TOP();
 				bit  [5:0]button;
 				logic [2:0]product;
 				logic [1:0]status;
-				bit [15:0]balance;
-				bit [7:0]info;
+				logic [15:0]balance;
+				logic [7:0]info;
+				bit soft_rst;
 				
 				tb_vm DUT(.*);			//Instantiation Of Testbench of Vending Machine.
 				vm VM(.*);				//Instantiation of Module of Vending Machine.
