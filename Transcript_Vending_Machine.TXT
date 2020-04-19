@@ -1,0 +1,161 @@
+# Compile of VM2002.sv was successful.
+# Compile of vm_tb.sv was successful.
+# Compile of vm_top.sv was successful.
+# 3 compiles, 0 failed with no errors.
+vsim -voptargs=+acc work.TOP
+# End time: 12:19:30 on Apr 19,2020, Elapsed time: 0:00:26
+# Errors: 0, Warnings: 0
+# vsim -voptargs="+acc" work.TOP 
+# Start time: 12:19:30 on Apr 19,2020
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# Loading sv_std.std
+# Loading work.TOP(fast)
+# Loading work.tb_vm(fast)
+# Loading work.vm(fast)
+run -all
+# ** Warning: (vsim-3881) N:/Pre_Silicon_Verification/assgn_1/vm_tb.sv(54): Sign-and-Width conversion applied in bin 'a' for Coverpoint 'cover_point_coin'. Value '4' changed to '3 (maximum)' value.
+#    Time: 0 ns  Iteration: 0  Instance: /TOP/DUT
+# ** Warning: (vsim-3882) N:/Pre_Silicon_Verification/assgn_1/vm_tb.sv(54): Out of bounds value range in bin 'a' for Coverpoint 'cover_point_coin' converted to nearest valid bounded range of [0:3].
+#    Time: 0 ns  Iteration: 0  Instance: /TOP/DUT
+# items_s = 0	 Count = '{0, 0, 0, 0, 0, 0}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    0	 INFORMATION =   0	 
+# items_s = 0	 Count = '{0, 0, 0, 0, 0, 0}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    z	 INFORMATION =   z	 
+# items_s = 0	 Count = '{0, 0, 0, 0, 0, 0}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    0	 INFORMATION =   0	 
+# 
+#  Test Case :1 : SUPPLIER : When Valid_s is 1 then supplier should abble to restock the items 
+# items_s = 0	 Count = '{0, 0, 0, 0, 0, 15}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    0	 INFORMATION =   z	 
+# items_s = 1	 Count = '{0, 0, 0, 0, 15, 15}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    0	 INFORMATION =   z	 
+# items_s = 2	 Count = '{0, 0, 0, 15, 15, 15}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    0	 INFORMATION =   z	 
+# items_s = 3	 Count = '{0, 0, 15, 15, 15, 15}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    0	 INFORMATION =   z	 
+# items_s = 4	 Count = '{0, 15, 15, 15, 15, 15}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    0	 INFORMATION =   z	 
+# items_s = 5	 Count = '{15, 15, 15, 15, 15, 15}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    0	 INFORMATION =   z	 
+# items_s = 5	 Count = '{15, 15, 15, 15, 15, 15}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    0	 INFORMATION =   0	 
+# 
+#   Test Case 2: CONSUMER : BUTTON 3 is SELECTED : COIN 5 cent is inserted 
+# items_s = 5	 Count = '{15, 15, 15, 15, 15, 15}	 STATUS=2	 BUTTON=000001	 COINS=01	 PRODUCT=z	 BALANCE =    5	 INFORMATION =   5	 
+# items_s = 5	 Count = '{15, 15, 15, 15, 15, 15}	 STATUS=2	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    5	 INFORMATION =   5	 
+# items_s = 5	 Count = '{15, 15, 15, 15, 15, 14}	 STATUS=3	 BUTTON=000000	 COINS=00	 PRODUCT=1	 BALANCE =    0	 INFORMATION =   0	 
+# items_s = 5	 Count = '{15, 15, 15, 15, 15, 14}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    0	 INFORMATION =   0	 
+# items_s = 5	 Count = '{15, 15, 15, 15, 15, 14}	 STATUS=2	 BUTTON=000001	 COINS=01	 PRODUCT=z	 BALANCE =    5	 INFORMATION =   5	 
+# items_s = 5	 Count = '{15, 15, 15, 15, 15, 14}	 STATUS=2	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    5	 INFORMATION =   5	 
+# items_s = 5	 Count = '{15, 15, 15, 15, 15, 13}	 STATUS=3	 BUTTON=000000	 COINS=00	 PRODUCT=1	 BALANCE =    0	 INFORMATION =   0	 
+# items_s = 5	 Count = '{15, 15, 15, 15, 15, 13}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    0	 INFORMATION =   0	 
+# items_s = 5	 Count = '{15, 15, 15, 15, 15, 13}	 STATUS=2	 BUTTON=000001	 COINS=01	 PRODUCT=z	 BALANCE =    5	 INFORMATION =   5	 
+# items_s = 5	 Count = '{15, 15, 15, 15, 15, 13}	 STATUS=2	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    5	 INFORMATION =   5	 
+# items_s = 5	 Count = '{15, 15, 15, 15, 15, 12}	 STATUS=3	 BUTTON=000000	 COINS=00	 PRODUCT=1	 BALANCE =    0	 INFORMATION =   0	 
+# items_s = 5	 Count = '{15, 15, 15, 15, 15, 12}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    0	 INFORMATION =   0	 
+# 
+#  Test Case 3: CONSUMER : BUTTON 2 is SELECTED : COIN 5 cent is inserted for 10 cent product value 
+# items_s = 5	 Count = '{15, 15, 15, 15, 15, 12}	 STATUS=2	 BUTTON=000010	 COINS=01	 PRODUCT=z	 BALANCE =    5	 INFORMATION =  10	 
+# items_s = 5	 Count = '{15, 15, 15, 15, 15, 12}	 STATUS=1	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    5	 INFORMATION =  10	 
+# items_s = 5	 Count = '{15, 15, 15, 15, 15, 12}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    5	 INFORMATION =   0	 
+# items_s = 5	 Count = '{15, 15, 15, 15, 15, 12}	 STATUS=2	 BUTTON=000010	 COINS=01	 PRODUCT=z	 BALANCE =   10	 INFORMATION =  10	 
+# items_s = 5	 Count = '{15, 15, 15, 15, 15, 12}	 STATUS=2	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =   10	 INFORMATION =  10	 
+# items_s = 5	 Count = '{15, 15, 15, 15, 14, 12}	 STATUS=3	 BUTTON=000000	 COINS=00	 PRODUCT=2	 BALANCE =    0	 INFORMATION =   0	 
+# items_s = 5	 Count = '{15, 15, 15, 15, 14, 12}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    0	 INFORMATION =   0	 
+# 
+#  Test Case 4: CONSUMER : BUTTON 1 and 3 is SELECTED : COIN 5 cent is inserted
+# items_s = 5	 Count = '{15, 15, 15, 15, 14, 12}	 STATUS=z	 BUTTON=000101	 COINS=01	 PRODUCT=z	 BALANCE =    5	 INFORMATION =   0	 
+# items_s = 5	 Count = '{15, 15, 15, 15, 14, 12}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    5	 INFORMATION =   0	 
+# 
+#  Test Case 5: CONSUMER : BUTTON 6 is SELECTED : COIN 25 and 5 cents ahe inserted and use previous balance
+# items_s = 5	 Count = '{15, 15, 15, 15, 14, 12}	 STATUS=2	 BUTTON=100000	 COINS=11	 PRODUCT=z	 BALANCE =   30	 INFORMATION =  30	 
+# items_s = 5	 Count = '{15, 15, 15, 15, 14, 12}	 STATUS=2	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =   30	 INFORMATION =  30	 
+# items_s = 5	 Count = '{14, 15, 15, 15, 14, 12}	 STATUS=3	 BUTTON=000000	 COINS=00	 PRODUCT=6	 BALANCE =    0	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 15, 15, 15, 14, 12}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    0	 INFORMATION =   0	 
+# 
+#  Test Case 6: CONSUMER : Pressed button 1 then enter 10 cents but then he wants to change his choice hensce he press soft reset and press button 2
+# items_s = 5	 Count = '{14, 15, 15, 15, 14, 12}	 STATUS=2	 BUTTON=000001	 COINS=10	 PRODUCT=z	 BALANCE =   10	 INFORMATION =   5	 
+# items_s = 5	 Count = '{14, 15, 15, 15, 14, 12}	 STATUS=1	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =   10	 INFORMATION =   5	 
+# items_s = 5	 Count = '{14, 15, 15, 15, 14, 12}	 STATUS=1	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =   10	 INFORMATION =   z	 
+# items_s = 5	 Count = '{14, 15, 15, 15, 14, 12}	 STATUS=2	 BUTTON=000010	 COINS=00	 PRODUCT=z	 BALANCE =   10	 INFORMATION =  10	 
+# items_s = 5	 Count = '{14, 15, 15, 15, 14, 12}	 STATUS=2	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =   10	 INFORMATION =  10	 
+# items_s = 5	 Count = '{14, 15, 15, 15, 13, 12}	 STATUS=3	 BUTTON=000000	 COINS=00	 PRODUCT=2	 BALANCE =    0	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 15, 15, 15, 13, 12}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    0	 INFORMATION =   0	 
+# 
+#  Test Case 7: CONSUMER : BUTTON 2 is Pressed but enter_key is not Pressed also insufficient Balance and he change his selection and press enter_key
+# items_s = 5	 Count = '{14, 15, 15, 15, 13, 12}	 STATUS=2	 BUTTON=000010	 COINS=01	 PRODUCT=z	 BALANCE =    5	 INFORMATION =  10	 
+# items_s = 5	 Count = '{14, 15, 15, 15, 13, 12}	 STATUS=1	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    5	 INFORMATION =  10	 
+# items_s = 5	 Count = '{14, 15, 15, 15, 13, 12}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    5	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 15, 15, 15, 13, 12}	 STATUS=2	 BUTTON=000001	 COINS=00	 PRODUCT=z	 BALANCE =    5	 INFORMATION =   5	 
+# items_s = 5	 Count = '{14, 15, 15, 15, 13, 12}	 STATUS=2	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    5	 INFORMATION =   5	 
+# items_s = 5	 Count = '{14, 15, 15, 15, 13, 11}	 STATUS=3	 BUTTON=000000	 COINS=00	 PRODUCT=1	 BALANCE =    0	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 15, 15, 15, 13, 11}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    0	 INFORMATION =   0	 
+# 
+#  Test Case 8: CONSUMER : BUTTON 5 is Pressed : COIN 25 cents is inserted
+# items_s = 5	 Count = '{14, 15, 15, 15, 13, 11}	 STATUS=2	 BUTTON=010000	 COINS=11	 PRODUCT=z	 BALANCE =   25	 INFORMATION =  25	 
+# items_s = 5	 Count = '{14, 15, 15, 15, 13, 11}	 STATUS=2	 BUTTON=010000	 COINS=11	 PRODUCT=z	 BALANCE =   50	 INFORMATION =  25	 
+# items_s = 5	 Count = '{14, 14, 15, 15, 13, 11}	 STATUS=3	 BUTTON=010000	 COINS=11	 PRODUCT=5	 BALANCE =   50	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 15, 15, 13, 11}	 STATUS=2	 BUTTON=010000	 COINS=11	 PRODUCT=z	 BALANCE =   75	 INFORMATION =  25	 
+# 
+#  Test Case 9 : CONSUMER : BUTTON 4 is pressed for 16 times : COIN 25 cent is inserted for 20 Cent product Value
+# items_s = 5	 Count = '{14, 14, 15, 15, 13, 11}	 STATUS=2	 BUTTON=001000	 COINS=11	 PRODUCT=z	 BALANCE =  125	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 14, 15, 13, 11}	 STATUS=3	 BUTTON=000000	 COINS=00	 PRODUCT=4	 BALANCE =  105	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 14, 15, 13, 11}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  105	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 14, 15, 13, 11}	 STATUS=2	 BUTTON=001000	 COINS=11	 PRODUCT=z	 BALANCE =  130	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 14, 15, 13, 11}	 STATUS=2	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  130	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 13, 15, 13, 11}	 STATUS=3	 BUTTON=000000	 COINS=00	 PRODUCT=4	 BALANCE =  110	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 13, 15, 13, 11}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  110	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 13, 15, 13, 11}	 STATUS=2	 BUTTON=001000	 COINS=11	 PRODUCT=z	 BALANCE =  135	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 13, 15, 13, 11}	 STATUS=2	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  135	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 12, 15, 13, 11}	 STATUS=3	 BUTTON=000000	 COINS=00	 PRODUCT=4	 BALANCE =  115	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 12, 15, 13, 11}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  115	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 12, 15, 13, 11}	 STATUS=2	 BUTTON=001000	 COINS=11	 PRODUCT=z	 BALANCE =  140	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 12, 15, 13, 11}	 STATUS=2	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  140	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 11, 15, 13, 11}	 STATUS=3	 BUTTON=000000	 COINS=00	 PRODUCT=4	 BALANCE =  120	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 11, 15, 13, 11}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  120	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 11, 15, 13, 11}	 STATUS=2	 BUTTON=001000	 COINS=11	 PRODUCT=z	 BALANCE =  145	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 11, 15, 13, 11}	 STATUS=2	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  145	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 10, 15, 13, 11}	 STATUS=3	 BUTTON=000000	 COINS=00	 PRODUCT=4	 BALANCE =  125	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 10, 15, 13, 11}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  125	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 10, 15, 13, 11}	 STATUS=2	 BUTTON=001000	 COINS=11	 PRODUCT=z	 BALANCE =  150	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 10, 15, 13, 11}	 STATUS=2	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  150	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 9, 15, 13, 11}	 STATUS=3	 BUTTON=000000	 COINS=00	 PRODUCT=4	 BALANCE =  130	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 9, 15, 13, 11}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  130	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 9, 15, 13, 11}	 STATUS=2	 BUTTON=001000	 COINS=11	 PRODUCT=z	 BALANCE =  155	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 9, 15, 13, 11}	 STATUS=2	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  155	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 8, 15, 13, 11}	 STATUS=3	 BUTTON=000000	 COINS=00	 PRODUCT=4	 BALANCE =  135	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 8, 15, 13, 11}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  135	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 8, 15, 13, 11}	 STATUS=2	 BUTTON=001000	 COINS=11	 PRODUCT=z	 BALANCE =  160	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 8, 15, 13, 11}	 STATUS=2	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  160	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 7, 15, 13, 11}	 STATUS=3	 BUTTON=000000	 COINS=00	 PRODUCT=4	 BALANCE =  140	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 7, 15, 13, 11}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  140	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 7, 15, 13, 11}	 STATUS=2	 BUTTON=001000	 COINS=11	 PRODUCT=z	 BALANCE =  165	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 7, 15, 13, 11}	 STATUS=2	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  165	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 6, 15, 13, 11}	 STATUS=3	 BUTTON=000000	 COINS=00	 PRODUCT=4	 BALANCE =  145	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 6, 15, 13, 11}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  145	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 6, 15, 13, 11}	 STATUS=2	 BUTTON=001000	 COINS=11	 PRODUCT=z	 BALANCE =  170	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 6, 15, 13, 11}	 STATUS=2	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  170	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 5, 15, 13, 11}	 STATUS=3	 BUTTON=000000	 COINS=00	 PRODUCT=4	 BALANCE =  150	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 5, 15, 13, 11}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  150	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 5, 15, 13, 11}	 STATUS=2	 BUTTON=001000	 COINS=11	 PRODUCT=z	 BALANCE =  175	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 5, 15, 13, 11}	 STATUS=2	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  175	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 4, 15, 13, 11}	 STATUS=3	 BUTTON=000000	 COINS=00	 PRODUCT=4	 BALANCE =  155	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 4, 15, 13, 11}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  155	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 4, 15, 13, 11}	 STATUS=2	 BUTTON=001000	 COINS=11	 PRODUCT=z	 BALANCE =  180	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 4, 15, 13, 11}	 STATUS=2	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  180	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 3, 15, 13, 11}	 STATUS=3	 BUTTON=000000	 COINS=00	 PRODUCT=4	 BALANCE =  160	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 3, 15, 13, 11}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  160	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 3, 15, 13, 11}	 STATUS=2	 BUTTON=001000	 COINS=11	 PRODUCT=z	 BALANCE =  185	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 3, 15, 13, 11}	 STATUS=2	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  185	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 2, 15, 13, 11}	 STATUS=3	 BUTTON=000000	 COINS=00	 PRODUCT=4	 BALANCE =  165	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 2, 15, 13, 11}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  165	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 2, 15, 13, 11}	 STATUS=2	 BUTTON=001000	 COINS=11	 PRODUCT=z	 BALANCE =  190	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 2, 15, 13, 11}	 STATUS=2	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  190	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 1, 15, 13, 11}	 STATUS=3	 BUTTON=000000	 COINS=00	 PRODUCT=4	 BALANCE =  170	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 1, 15, 13, 11}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  170	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 1, 15, 13, 11}	 STATUS=2	 BUTTON=001000	 COINS=11	 PRODUCT=z	 BALANCE =  195	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 1, 15, 13, 11}	 STATUS=2	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  195	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 0, 15, 13, 11}	 STATUS=3	 BUTTON=000000	 COINS=00	 PRODUCT=4	 BALANCE =  175	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 0, 15, 13, 11}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  175	 INFORMATION =   0	 
+# items_s = 5	 Count = '{14, 14, 0, 15, 13, 11}	 STATUS=2	 BUTTON=001000	 COINS=11	 PRODUCT=z	 BALANCE =  200	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 0, 15, 13, 11}	 STATUS=0	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  200	 INFORMATION =  20	 
+# items_s = 5	 Count = '{14, 14, 0, 15, 13, 11}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =  200	 INFORMATION =   0	 
+# 
+#  Test Case 10 : Hard Reset and Soft Reset pressed at same time 
+# items_s = 5	 Count = '{0, 0, 0, 0, 0, 0}	 STATUS=z	 BUTTON=000000	 COINS=00	 PRODUCT=z	 BALANCE =    z	 INFORMATION =   z	 
+# 
+#  Test Case 11: CONSUMER : BUTTON 5 is SELECTED : COIN 10 cent is inserted continously for 10 cent product value but Supplier did not provide so it will not give any product
+# items_s = 5	 Count = '{0, 0, 0, 0, 0, 0}	 STATUS=z	 BUTTON=010000	 COINS=10	 PRODUCT=z	 BALANCE =    z	 INFORMATION =   z	 
+# ** Note: $stop    : N:/Pre_Silicon_Verification/assgn_1/vm_tb.sv(224)
+#    Time: 1855 ns  Iteration: 0  Instance: /TOP/DUT
+# Break in Module tb_vm at N:/Pre_Silicon_Verification/assgn_1/vm_tb.sv line 224
